@@ -16,10 +16,10 @@ class ConverterTestCase(TestCase):
     def test_converter(self):
         Converter.get_rates = mock_get_rates
 
-        assert Converter().convert('RUB', 'USD', '100') == 1
-        assert Converter().convert('USD', 'RUB', '100') == 10000
-        assert Converter().convert('RUB', 'RUB', '100') == 100
-        assert Converter().convert('USD', 'USD', '100') == 100
+        assert Converter().convert('RUB', 'USD', 100) == 1
+        assert Converter().convert('USD', 'RUB', 100) == 10000
+        assert Converter().convert('RUB', 'RUB', 100) == 100
+        assert Converter().convert('USD', 'USD', 100) == 100
 
 
 class RateTestCase(APITestCase):
