@@ -1,4 +1,4 @@
-# TODO лист
+# Конвертер валют по курсу ЦБ
 
 ## Как развернуть local-окружение
 
@@ -22,23 +22,12 @@ SECRET_KEY=123456
 $ docker compose build
 ```
 
-Накатите миграции:
-
-```shell
-$ docker compose run --rm django python manage.py migrate
-```
-
 Запустите докер-контейнеры:
 
 ```shell
 $ docker compose up
 ```
 
-В новой консоли, не выключая работающий контейнер, загрузите в БД тестовые данные:
-
-```shell
-$ docker compose exec postgres psql -U dobro -f /test_data/postgres.sql
-```
 
 Запуск тестов:
 ```shell
@@ -47,15 +36,6 @@ $ docker compose run --rm django python manage.py test
 
 ## Как использовать
 
-Все эндпойнты доступны по адресу [127.0.0.1:8000](http://127.0.0.1:8000) \
-Админка доступна по адресу [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
-
-В разработческой БД уже есть суперпользователь:
-
-- `admin`, пароль `admin`
-
-и пользователи:
-
-- `user1`, пароль `cnkptT2z`
-- `user2`, пароль `cnkptT2z`
-
+Конвертировать валюты можно двумя способами:
+[/api/rates/usd/rub/3](http://127.0.0.1:8000/api/rates/usd/rub/3) \
+[/api/rates/?from=USD&to=RUB&value=3](http://127.0.0.1:8000/api/rates/?from=USD&to=RUB&value=3) 
