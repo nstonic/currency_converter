@@ -14,14 +14,14 @@ def rate_view(request):
     if isinstance(value, str) and not value.isdigit():
         return JsonResponse({'error': 'Wrong value'}, status=status.HTTP_400_BAD_REQUEST)
 
-    return rate_path_view(request, from_, to, value)
+    return rate_path_view(request, from_, to, int(value))
 
 
 @require_http_methods(["GET"])
 def rate_path_view(request, from_: str, to: str, value: int):
     try:
         data = {
-            "result": Converter().convert(from_, to, int(value))
+            "result": Converter().convert(from_, to, value)
         }
     except ValueError as ex:
         return JsonResponse({'error': str(ex)}, status=status.HTTP_400_BAD_REQUEST)
