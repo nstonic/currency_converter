@@ -11,7 +11,7 @@ def rate_view(request):
     to = request.GET.get('to')
     value = request.GET.get('value')
 
-    if isinstance(value, str) and not value.isdigit():
+    if not value.isdigit():
         return JsonResponse({'error': 'Wrong value'}, status=status.HTTP_400_BAD_REQUEST)
 
     return rate_path_view(request, from_, to, int(value))
