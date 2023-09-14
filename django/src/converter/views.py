@@ -1,6 +1,6 @@
+from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
+from rest_framework import status
 
 from converter.services import Converter
 
@@ -11,11 +11,19 @@ def rate_view(request):
     to = request.GET.get('to')
     value = request.GET.get('value')
 
-    if not all([from_, to, value]):
-        raise ValueError('Wrong request')
+    if isinstance(value, str) and not value.isdigit():
+        return JsonResponse({'error': 'Wrong value'}, status=status.HTTP_400_BAD_REQUEST)
 
-    data = {
-        "result": Converter().convert(from_, to, value)
-    }
+    return rate_path_view(request, from_, to, value)
 
-    return Response(data, status=HTTP_200_OK)
+
+@require_http_methods(["GET"])
+def rate_path_view(request, from_: str, to: str, value: int):
+    try:
+        data = {
+            "result": Converter().convert(from_, to, int(value))
+        }
+    except ValueError as ex:
+        return JsonResponse({'error': str(ex)}, status=status.HTTP_400_BAD_REQUEST)
+
+    return JsonResponse(data, status=status.HTTP_200_OK)
