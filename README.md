@@ -36,6 +36,6 @@ $ docker compose run --rm django python manage.py test
 
 ## Как использовать
 
-Конвертировать валюты можно двумя способами:
+Конвертировать валюты можно двумя способами: \
 [/api/rates/usd/rub/3](http://127.0.0.1:8000/api/rates/usd/rub/3) \
 [/api/rates/?from=USD&to=RUB&value=3](http://127.0.0.1:8000/api/rates/?from=USD&to=RUB&value=3) 
