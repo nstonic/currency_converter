@@ -26,7 +26,7 @@ def rate_path_view(request, from_: str, to: str, value: int):
         }
     except ValueError as ex:
         return JsonResponse({'error': str(ex)}, status=status.HTTP_400_BAD_REQUEST)
-    except HTTPError as ex:
+    except (HTTPError, KeyError) as ex:
         return JsonResponse({'error': str(ex)}, status=status.HTTP_424_FAILED_DEPENDENCY)
 
     return JsonResponse(data, status=status.HTTP_200_OK)
