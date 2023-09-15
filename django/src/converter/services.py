@@ -19,9 +19,6 @@ class Converter:
         if from_ not in rates or to not in rates:
             raise ValueError('Unknown currency')
 
-        if from_ == to:
-            result = value
-        else:
-            result = rates.get(to, 1) * value / rates.get(from_, 1)
+        result = rates[to] * value / rates[from_]
 
         return round(result, 2)
